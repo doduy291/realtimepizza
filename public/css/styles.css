@@ -1,0 +1,29 @@
+body {
+  font-family: 'Roboto Condensed', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+nav li:last-child a {
+  background: #fe5f1e;
+}
+nav li a {
+  transition: all 0.3s ease-in-out;
+}
+nav li a:hover {
+  color: #fe5f1e;
+}
+.hero {
+  background-color: #f8f8f8;
+}
+.menu .size {
+  background-color: #f8f8f8;
+}
+.menu .add-to-cart {
+  border: 2px solid #fe5f1e;
+  color: #fe5f1e;
+}
+.menu .add-to-cart:hover {
+  transition: all 0.3s ease-in-out;
+  background: #fe5f1e;
+  color: #fff;
+}
