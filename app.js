@@ -3,11 +3,12 @@ const expressLayouts = require('express-ejs-layouts');
 const path = require('path');
 const app = express();
 
-app.use(express.json());
+// Require Router
+const homeRouter = require('./routes/home.Router');
+const authRouter = require('./routes/auth.Router');
+const cartRouter = require('./routes/cart.Router');
 
-app.get('/', (req, res) => {
-  res.render('home');
-});
+app.use(express.json());
 
 // Views EJS
 app.use(expressLayouts);
@@ -16,6 +17,11 @@ app.set('view engine', 'ejs');
 
 // Serving static files
 app.use(express.static(path.join(__dirname, 'public')));
+
+// Use Router
+app.use('/', homeRouter);
+app.use('/auth', authRouter);
+app.use('/cart', cartRouter);
 
 // Run server host
 const port = process.env.PORT || 8000;

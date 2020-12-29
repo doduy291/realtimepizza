@@ -27,3 +27,31 @@ nav li a:hover {
   background: #fe5f1e;
   color: #fff;
 }
+.hero button {
+  background-color: #fe5f1e;
+}
+.hero button:hover {
+  background-color: #492f25;
+}
+.empty-cart a {
+  background-color: #fe5f1e;
+}
+section.cart {
+  background-color: #f8f8f8;
+}
+section.cart .amount {
+  color: #fe5f1e;
+}
+section.cart .btn-order {
+  background-color: #fe5f1e;
+}
+section.login .btn-login {
+  background-color: #fe5f1e;
+}
+section.login {
+  background: #f8f8f8;
+  min-height: 90vh;
+}
+section.login .btn-register {
+  background-color: #fe5f1e;
+}
