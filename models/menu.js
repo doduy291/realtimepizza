@@ -7,5 +7,5 @@ const menuSchema = new mongoose.Schema({
   size: { type: String, required: true },
 });
 
-const Menu = mongoose.model('Menu', menuSchema, 'Menu');
+const Menu = mongoose.model('Menu', menuSchema, 'menu');
 module.exports = Menu;
