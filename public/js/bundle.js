@@ -8439,7 +8439,7 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 var addCart = /*#__PURE__*/function () {
-  var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(pizza) {
+  var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(pizza, cartcount) {
     return regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
@@ -8449,11 +8449,10 @@ var addCart = /*#__PURE__*/function () {
             return (0, _axios.default)({
               method: 'POST',
               url: '/cart/add-cart',
-              data: {
-                pizza: pizza
-              }
+              data: pizza
             }).then(function (res) {
               console.log(res);
+              cartcount.text(res.data.totalQty);
             });
 
           case 3:
@@ -8473,7 +8472,7 @@ var addCart = /*#__PURE__*/function () {
     }, _callee, null, [[0, 5]]);
   }));
 
-  return function addCart(_x) {
+  return function addCart(_x, _x2) {
     return _ref.apply(this, arguments);
   };
 }();
@@ -8746,13 +8745,15 @@ require("regenerator-runtime/runtime.js");
 
 var _addcart = require("./addcart.js");
 
+// Add Pizza to Cart
 var addtocart = $('.add-to-cart');
+var getCartCount = $('.cartCount');
 
 if (addtocart) {
   addtocart.each(function (index, btnElement) {
     btnElement.addEventListener('click', function (e) {
       var getPizzaAdded = JSON.parse(btnElement.dataset.pizza);
-      (0, _addcart.addCart)(getPizzaAdded);
+      (0, _addcart.addCart)(getPizzaAdded, getCartCount);
       console.log(getPizzaAdded);
     });
   });
@@ -8785,7 +8786,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "9010" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "2469" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

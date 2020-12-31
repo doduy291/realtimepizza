@@ -38,12 +38,18 @@ app.use(
     store: MongoStore,
     resave: false,
     saveUninitialized: true,
-    cookie: { maxAge: 24 * 60 * 60 * 1000 }, // 24h
+    cookie: { maxAge: 12 * 60 * 60 * 1000 }, // 12h
   })
 );
 
 //Flash message
 app.use(flash());
+
+//Global Middleware get Session
+app.use((req, res, next) => {
+  res.locals.session = req.session;
+  next();
+});
 
 // Views EJS
 app.use(expressLayouts);

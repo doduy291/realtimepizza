@@ -1,0 +1,5 @@
+# NPM packages folder.
+node_modules/
+
+# cache folder Parcel Bundle
+.cache/
