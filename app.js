@@ -6,6 +6,7 @@ const compression = require('compression');
 const mongoose = require('mongoose');
 const mongoDBStore = require('connect-mongo')(session);
 const flash = require('express-flash');
+const passport = require('passport');
 // const morgan = require('morgan');
 
 // Use ExpressJS
@@ -42,12 +43,19 @@ app.use(
   })
 );
 
+// Passport Session
+const passportMDW = require('./middleware/passport');
+passportMDW.init(passport);
+app.use(passport.initialize());
+app.use(passport.session());
+
 //Flash message
 app.use(flash());
 
 //Global Middleware get Session
 app.use((req, res, next) => {
   res.locals.session = req.session;
+  res.locals.user = req.user;
   next();
 });
 
