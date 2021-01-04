@@ -2,7 +2,7 @@
 node_modules/
 
 # cache folder Parcel Bundle
-.cache
+.cache/
 
 # Prettier
 .prettierrc

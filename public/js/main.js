@@ -13,3 +13,11 @@ if (addtocart) {
     });
   });
 }
+
+//Remove alert message after specify time
+let alertMes = $('#success-alert');
+if (alertMes) {
+  setTimeout(() => {
+    alertMes.remove();
+  }, 2000);
+}

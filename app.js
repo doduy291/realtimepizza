@@ -19,6 +19,7 @@ app.use(compression());
 const homeRouter = require('./routes/home.Router');
 const authRouter = require('./routes/auth.Router');
 const cartRouter = require('./routes/cart.Router');
+const adminRouter = require('./routes/admin.Router');
 
 // Replace Body-parse for Expressjs 4.16+
 // Parse JSON bodies
@@ -68,9 +69,13 @@ app.set('view engine', 'ejs');
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Use Router
+// Client
 app.use('/', homeRouter);
 app.use('/auth', authRouter);
 app.use('/cart', cartRouter);
+
+// Admin
+app.use('/admin', adminRouter);
 
 // Database Connection
 const url = 'mongodb://localhost:27017/pizza';

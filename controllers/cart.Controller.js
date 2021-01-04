@@ -1,5 +1,6 @@
-const DBMenu = require('../models/menu');
-
+const DBorder = require('../models/order');
+let moment = require('moment');
+moment.locale('vi');
 exports.getCart = (req, res) => {
   return res.render('client/cart');
 };
@@ -29,4 +30,59 @@ exports.addCart = async (req, res) => {
     cart.totalPrice = cart.totalPrice + req.body.price;
   }
   return await res.json({ totalQty: req.session.cart.totalQty });
+};
+
+exports.orderCart = async (req, res) => {
+  const { address, phonenumber } = req.body;
+  if (!address || !phonenumber) {
+    req.flash('message', 'No blank');
+    return res.redirect('/cart');
+  }
+  // Create new order
+  await DBorder.create({
+    iduser: req.user._id,
+    items: req.session.cart.items,
+    phone: phonenumber,
+    address: address,
+  })
+    .then((resultOrder) => {
+      req.flash('success', 'Order successfully!');
+      delete req.session.cart;
+      return res.redirect('/cart/bill-order');
+    })
+    .catch((err) => {
+      req.flash('error', 'Something wrong!');
+      return res.redirect('/cart');
+    });
+
+  // Or Other way
+  // const order = await DBorder.create({
+  //   iduser: req.user._id,
+  //   items: req.session.cart.items,
+  //   phone: phonenumber,
+  //   address: address,
+  // });
+  // OR
+  // const order = new DBorder({
+  //   iduser: req.user._id,
+  //   items: req.session.cart.items,
+  //   phone: phonenumber,
+  //   address: address,
+  // });
+
+  // order
+  //   .save()
+  //   .then((resultOrder) => {
+  //     req.flash('success', 'Order successfully!');
+  //     return res.redirect('/cart');
+  //   })
+  //   .catch((err) => {
+  //     req.flash('error', 'Something wrong!');
+  //     return res.redirect('/cart');
+  //   });
+};
+
+exports.billorderCart = async (req, res) => {
+  const listbillorders = await DBorder.find({ iduser: req.user._id }).sort({ createdAt: -1 });
+  return res.render('client/bill-order', { listBillOrders: listbillorders, moment: moment });
 };
