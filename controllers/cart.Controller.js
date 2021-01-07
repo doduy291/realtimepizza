@@ -83,6 +83,6 @@ exports.orderCart = async (req, res) => {
 };
 
 exports.billorderCart = async (req, res) => {
-  const listbillorders = await DBorder.find({ iduser: req.user._id }).sort({ createdAt: -1 });
+  const listbillorders = await DBorder.find({ iduser: req.user._id }).sort({ createdAt: 'desc' });
   return res.render('client/bill-order', { listBillOrders: listbillorders, moment: moment });
 };

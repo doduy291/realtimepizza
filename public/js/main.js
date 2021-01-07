@@ -1,5 +1,6 @@
 import '@babel/polyfill';
 import { addCart } from './addcart.js';
+import { getBillOrderToSetTrack } from './admin.js';
 
 // Add Pizza to Cart
 let addtocart = $('.add-to-cart');
@@ -20,4 +21,11 @@ if (alertMes) {
   setTimeout(() => {
     alertMes.remove();
   }, 2000);
+}
+
+// Admin
+// let getIDbillorder = document.querySelector('#billorderTableBody');
+let getIDbillorder = $('#billorderTableBody');
+if (getIDbillorder) {
+  getBillOrderToSetTrack(getIDbillorder);
 }

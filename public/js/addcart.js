@@ -7,7 +7,6 @@ export const addCart = async (pizza, cartcount) => {
       url: '/cart/add-cart',
       data: pizza,
     }).then((res) => {
-      console.log(res);
       cartcount.text(res.data.totalQty);
     });
   } catch (err) {

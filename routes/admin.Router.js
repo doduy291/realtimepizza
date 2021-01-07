@@ -3,6 +3,6 @@ const adminTrackOrderController = require('../controllers/admin/track-order.Cont
 const role = require('../middleware/role');
 const router = express.Router();
 
-router.route('/track-order').get(adminTrackOrderController.getTrackOrder);
+router.route('/track-order').get(role.notAccessAdmin, adminTrackOrderController.getTrackOrder);
 
 module.exports = router;
