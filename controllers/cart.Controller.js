@@ -86,3 +86,11 @@ exports.billorderCart = async (req, res) => {
   const listbillorders = await DBorder.find({ iduser: req.user._id }).sort({ createdAt: 'desc' });
   return res.render('client/bill-order', { listBillOrders: listbillorders, moment: moment });
 };
+exports.billorderdetailCart = async (req, res) => {
+  const detail = await DBorder.findById(req.params.id);
+  if (req.user._id.toString() === detail.iduser.toString()) {
+    return res.render('client/bill-order-detail', { bodetail: detail, moment: moment });
+  } else {
+    res.redirect('/');
+  }
+};

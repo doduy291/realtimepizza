@@ -7,5 +7,6 @@ router.route('/').get(cartController.getCart);
 router.route('/add-cart').post(cartController.addCart);
 router.route('/order').post(cartController.orderCart);
 router.route('/bill-order').get(role.notAccessBillOrder, cartController.billorderCart);
+router.route('/bill-order/:id').get(role.notAccessBillOrder, cartController.billorderdetailCart);
 
 module.exports = router;

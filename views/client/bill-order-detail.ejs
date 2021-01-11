@@ -1,0 +1,18 @@
+<section class="status">
+    <div class="container mx-auto">
+        <div class="status-box w-3/4 mx-auto">
+            <div class="flex items-center justify-between mb-12">
+                <h1 class="text-xl font-bold">Track Order</h1>
+                <h6 class="bg-fe5f1e py-1  px-4 rounded-full text-xl text-white"><%= bodetail._id %></h6>
+                <input id="hiddenBillOrderInput" type="hidden" value="<%= JSON.stringify(bodetail) %>" />
+            </div>
+            <ul>
+                <li class="status_line md:text-xl pb-16" data-status="order_placed"><span>Order Placed</span></li>
+                <li class="status_line md:text-xl pb-16" data-status="confirmed"><span>Order Confirmed</span></li>
+                <li class="status_line md:text-xl pb-16" data-status="prepared"><span>Preparation</span></li>
+                <li class="status_line md:text-xl pb-16" data-status="delivered"><span>Out of Delivery</span></li>
+                <li class="status_line md:text-xl" data-status="completed"><span>Complete</span></li>
+            </ul>
+        </div>
+    </div>
+</section>

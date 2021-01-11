@@ -10,3 +10,12 @@ exports.getTrackOrder = async (req, res) => {
     return res.render('admin/track-order');
   }
 };
+
+exports.updateStatusTrackOrder = async (req, res) => {
+  await DBorder.updateOne({ _id: req.body.idorder }, { status: req.body.status }).then((result) => {
+    if (!result) {
+      return res.redirect('/admin/track-order');
+    }
+    return res.redirect('/admin/track-order');
+  });
+};

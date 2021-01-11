@@ -79,6 +79,7 @@ app.use('/admin', adminRouter);
 
 // Database Connection
 const url = 'mongodb://localhost:27017/pizza';
+// const url = encodeURI('mongodb+srv://duydo:du7d0z9ibwt@cluster0.9ddzc.mongodb.net/pizza');
 mongoose
   .connect(url, {
     useNewUrlParser: true,
