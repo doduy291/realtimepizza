@@ -4,6 +4,7 @@ import { getBillOrderToSetTrack } from './admin.js';
 import { updateStatus } from './updatestatus.js';
 import 'moment/locale/vi';
 
+/* *********************************************************** */
 // Add Pizza to Cart
 let addtocart = $('.add-to-cart');
 let getCartCount = $('.cartCount');
@@ -17,6 +18,7 @@ if (addtocart) {
   });
 }
 
+/* *********************************************************** */
 // Change bill order status
 let time = document.createElement('small');
 let statuses = document.querySelectorAll('.status_line');
@@ -35,9 +37,18 @@ if (alertMes) {
   }, 2000);
 }
 
+/* *********************************************************** */
 // Admin
 // let getIDbillorder = document.querySelector('#billorderTableBody');
 let getIDbillorder = $('#billorderTableBody');
 if (getIDbillorder) {
   getBillOrderToSetTrack(getIDbillorder);
+}
+
+/* *********************************************************** */
+// Socket
+let socket = io();
+// Join
+if (order) {
+  socket.emit('join', `order_${order._id}`);
 }

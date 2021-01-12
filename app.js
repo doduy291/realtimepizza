@@ -96,8 +96,16 @@ mongoose
 
 // Run server host
 const port = process.env.PORT || 8000;
-app.listen(port, () => {
+const server = app.listen(port, () => {
   console.log(`App running on port ${port}...`);
 });
 
-// module.exports = app; // Testing (AFTER)
+// Socket
+const io = require('socket.io')(server);
+io.on('connection', (socket) => {
+  // Best argument name would be "roomName" instead of "orderId"
+  // socket.on('join', (roomName) =>{
+  socket.on('join', (orderId) => {
+    socket.join(orderId);
+  });
+});
