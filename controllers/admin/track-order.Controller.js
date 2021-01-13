@@ -16,6 +16,9 @@ exports.updateStatusTrackOrder = async (req, res) => {
     if (!result) {
       return res.redirect('/admin/track-order');
     }
+    //Emit event
+    const eventEmitter = req.app.get('eventEmitter');
+    eventEmitter.emit('statusUpdated', { id: req.body.idorder, status: req.body.status });
     return res.redirect('/admin/track-order');
   });
 };

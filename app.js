@@ -7,6 +7,7 @@ const mongoose = require('mongoose');
 const mongoDBStore = require('connect-mongo')(session);
 const flash = require('express-flash');
 const passport = require('passport');
+const Emitter = require('events');
 // const morgan = require('morgan');
 
 // Use ExpressJS
@@ -32,6 +33,10 @@ const MongoStore = new mongoDBStore({
   mongooseConnection: mongoose.connection,
   collection: 'session',
 });
+
+// Event emitter
+const eventEmitter = new Emitter();
+app.set('eventEmitter', eventEmitter);
 
 // Session secret
 app.use(
@@ -108,4 +113,8 @@ io.on('connection', (socket) => {
   socket.on('join', (orderId) => {
     socket.join(orderId);
   });
+});
+
+eventEmitter.on('statusUpdated', (data) => {
+  io.to(`order_${data.id}`).emit('statusUpdated', data);
 });

@@ -1,4 +1,5 @@
 import '@babel/polyfill';
+import moment from 'moment';
 import { addCart } from './addcart.js';
 import { getBillOrderToSetTrack } from './admin.js';
 import { updateStatus } from './updatestatus.js';
@@ -48,7 +49,23 @@ if (getIDbillorder) {
 /* *********************************************************** */
 // Socket
 let socket = io();
+
+let timeSocketIO = document.createElement('small');
+let statusesSocketIO = document.querySelectorAll('.status_line');
+let hiddenBillOrderSocketIO = document.querySelector('#hiddenBillOrderInput');
+let orderSocketIO = hiddenBillOrderSocketIO ? hiddenBillOrderSocketIO.value : null;
+orderSocketIO = JSON.parse(orderSocketIO);
+
 // Join
-if (order) {
+if (hiddenBillOrderSocketIO) {
   socket.emit('join', `order_${order._id}`);
+
+  socket.on('statusUpdated', (data) => {
+    const updatedOrder = { ...orderSocketIO };
+
+    updatedOrder.updatedAt = moment().format();
+    updatedOrder.status = data.status;
+    console.log(updatedOrder);
+    updateStatus(updatedOrder, statusesSocketIO, timeSocketIO);
+  });
 }
