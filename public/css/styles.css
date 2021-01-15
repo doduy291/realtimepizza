@@ -197,7 +197,7 @@ section.status {
   border-radius: 9999px;
 }
 
-@media (max-width: 1060px) {
+@media (max-width: 1300px) {
   .container {
     max-width: 90%;
   }

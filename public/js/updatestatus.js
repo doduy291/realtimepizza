@@ -1,6 +1,10 @@
 import moment from 'moment';
 
 export const updateStatus = (order, statuses, time) => {
+  statuses.forEach((status) => {
+    status.classList.remove('step-completed');
+    status.classList.remove('current');
+  });
   let stepCompleted = true;
   statuses.forEach((status) => {
     if (stepCompleted) {

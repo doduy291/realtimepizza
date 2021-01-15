@@ -1,16 +1,26 @@
 import axios from 'axios';
 import moment from 'moment';
 
-export const getBillOrderToSetTrack = async (IDbillorder) => {
+export const getBillOrderToSetTrack = async (IDbillorder, socket) => {
   try {
     let markup;
+    let orders = [];
     const res = await axios({
       method: 'GET',
       url: '/admin/track-order',
       headers: { 'X-Requested-With': 'XMLHttpRequest' },
     });
-    markup = generateMarkup(res.data);
+    orders = res.data;
+    // markup = generateMarkup(res.data);
+    markup = generateMarkup(orders);
     IDbillorder.html(markup);
+
+    // Socket
+    socket.on('orderUpdated', (order) => {
+      orders.unshift(order);
+      IDbillorder.html('');
+      IDbillorder.html(generateMarkup(orders));
+    });
   } catch (err) {
     console.log(err);
   }

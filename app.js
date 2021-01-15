@@ -118,3 +118,6 @@ io.on('connection', (socket) => {
 eventEmitter.on('statusUpdated', (data) => {
   io.to(`order_${data.id}`).emit('statusUpdated', data);
 });
+eventEmitter.on('orderUpdated', (data) => {
+  io.to('adminRoom').emit('orderUpdated', data);
+});

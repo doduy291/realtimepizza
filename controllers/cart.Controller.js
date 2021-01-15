@@ -24,7 +24,6 @@ exports.addCart = async (req, res) => {
     cart.totalQty = cart.totalQty + 1;
     cart.totalPrice = cart.totalPrice + req.body.price;
   } else {
-    console.log(cart.items[req.body._id]);
     cart.items[req.body._id].qty = cart.items[req.body._id].qty + 1;
     cart.totalQty = cart.totalQty + 1;
     cart.totalPrice = cart.totalPrice + req.body.price;
@@ -46,8 +45,11 @@ exports.orderCart = async (req, res) => {
     address: address,
   })
     .then((resultOrder) => {
+      console.log(resultOrder);
       req.flash('success', 'Order successfully!');
       delete req.session.cart;
+      const eventEmitter = req.app.get('eventEmitter');
+      eventEmitter.emit('orderUpdated', resultOrder);
       return res.redirect('/cart/bill-order');
     })
     .catch((err) => {
