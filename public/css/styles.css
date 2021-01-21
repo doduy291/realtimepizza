@@ -185,29 +185,42 @@ section.status {
 .status-box ul li.current span:after {
   background: #fe5f1e;
 }
-
 .status-box ul li small {
   float: right;
   background-color: #ccc;
   font-size: 14px;
   font-weight: bold;
-  margin-top: 8px;
+  /* margin-top: 8px; */
   padding-left: 1rem;
   padding-right: 1rem;
   border-radius: 9999px;
+}
+
+@media (max-width: 520px) {
+  .status-box ul li small {
+    float: right;
+    background-color: #ccc;
+    font-size: 12px;
+    font-weight: bold;
+    /* margin-top: 8px; */
+    padding-left: 1rem;
+    padding-right: 1rem;
+    border-radius: 9999px;
+  }
 }
 
 @media (max-width: 1300px) {
   .container {
     max-width: 90%;
   }
+}
+@media (max-width: 768px) {
   table {
     display: block;
     overflow-x: auto;
     white-space: nowrap;
   }
 }
-
 @media (max-width: 768px) {
   .status-box ul li span:before {
     font-size: 34px;

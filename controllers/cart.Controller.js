@@ -1,8 +1,9 @@
 const DBorder = require('../models/order');
 let moment = require('moment');
 moment.locale('vi');
+
 exports.getCart = (req, res) => {
-  return res.render('client/cart');
+  return res.render('client/cart', { sessionID: req.sessionID });
 };
 
 exports.addCart = async (req, res) => {
@@ -95,4 +96,12 @@ exports.billorderdetailCart = async (req, res) => {
   } else {
     res.redirect('/');
   }
+};
+
+exports.removeCart = async (req, res) => {
+  let cart = req.session.cart;
+  cart.totalQty = cart.totalQty - cart.items[req.body.iditem].qty;
+  cart.totalPrice = cart.totalPrice - Number(cart.items[req.body.iditem].qty * cart.items[req.body.iditem].pizza.price);
+  delete cart.items[req.body.iditem];
+  return res.json({ redirect: '/cart' });
 };

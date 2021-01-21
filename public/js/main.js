@@ -1,6 +1,6 @@
 import '@babel/polyfill';
 import moment from 'moment';
-import { addCart } from './addcart.js';
+import { addCart, removeCart } from './cart.js';
 import { getBillOrderToSetTrack } from './admin.js';
 import { updateStatus } from './updatestatus.js';
 import 'moment/locale/vi';
@@ -23,6 +23,16 @@ if (addtocart) {
   });
 }
 
+// Remove Pizza from Cart
+let getPizzaRemove = document.querySelectorAll('#removeCart');
+if (getPizzaRemove) {
+  getPizzaRemove.forEach((el) => {
+    el.addEventListener('click', () => {
+      let dataIDItem = el.dataset.iditem;
+      removeCart(dataIDItem);
+    });
+  });
+}
 /* *********************************************************** */
 // Change bill order status
 let time = document.createElement('small');
