@@ -7,7 +7,7 @@ const orderSchema = new mongoose.Schema(
     phone: { type: String, required: true },
     address: { type: String, required: true },
     paymenttype: { type: String, default: 'COD' },
-    status: { type: String, defaut: 'order_placed' },
+    status: { type: String, default: 'order_placed' },
   },
   {
     timestamps: true,

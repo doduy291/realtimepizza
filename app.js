@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const expressLayouts = require('express-ejs-layouts');
 const path = require('path');
@@ -41,7 +42,7 @@ app.set('eventEmitter', eventEmitter);
 // Session secret
 app.use(
   session({
-    secret: 'bestsecretsession',
+    secret: process.env.SECRET_SESSION,
     store: MongoStore,
     resave: false,
     saveUninitialized: true,
@@ -83,10 +84,10 @@ app.use('/cart', cartRouter);
 app.use('/admin', adminRouter);
 
 // Database Connection
-const url = 'mongodb://localhost:27017/pizza';
+// const url = 'mongodb://localhost:27017/pizza';
 // const url = encodeURI('mongodb+srv://duydo:du7d0z9ibwt@cluster0.9ddzc.mongodb.net/pizza');
 mongoose
-  .connect(url, {
+  .connect(process.env.MONGODB_URL, {
     useNewUrlParser: true,
     useCreateIndex: true,
     useUnifiedTopology: true,
