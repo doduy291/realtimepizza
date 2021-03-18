@@ -82,10 +82,13 @@ app.use('/cart', cartRouter);
 
 // Admin
 app.use('/admin', adminRouter);
+// Error Handle
+app.use((req, res) => {
+  res.status(404).send('<h1> Page Not Found </h1>');
+});
 
 // Database Connection
 // const url = 'mongodb://localhost:27017/pizza';
-// const url = encodeURI('mongodb+srv://duydo:du7d0z9ibwt@cluster0.9ddzc.mongodb.net/pizza');
 mongoose
   .connect(process.env.MONGODB_URL, {
     useNewUrlParser: true,
